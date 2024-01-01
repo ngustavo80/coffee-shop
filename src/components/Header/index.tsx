@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
-import { MapPin, ShoppingCart } from '@phosphor-icons/react'
+import { NavLink } from 'react-router-dom'
+import { MapPin, ShoppingCart, XCircle } from '@phosphor-icons/react'
 
 import coffeeDeliveryLogo from '../../assets/coffeeLogo.svg'
-import { HeaderContainer } from './styles'
-import { NavLink } from 'react-router-dom'
+import { HeaderContainer, LocationCardDenied, LocationCardGranted } from './styles'
 
 interface GeoLocationResultType {
-  name: string;
   state: "granted" | "denied" | "prompt";
 }
 
@@ -17,58 +16,62 @@ interface PositionProps {
   }
 }
 
+interface LocationProps {
+    stateCode: string | undefined;
+    city: string | undefined;
+}
+
 
 export function Header() {
-  const [stateCode, setStateCode] = useState(); 
-  const [town, setTown] = useState();
-  
+  const [location, setLocation] = useState<LocationProps>()
   const APIkey = 'd346596fb06e4d1f94150099d533d0ed'
-  const options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0, };
   
-  function getLocationInfo(latitude: number, longitude: number) { 
+  async function getLocationInfo(latitude: number, longitude: number) { 
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${latitude},${longitude}&key=${APIkey}`
     
-    fetch(url) 
+    await fetch(url) 
     .then((response) => response.json()) 
       .then((data) => { 
         console.log(data)
         if (data.status.code === 200) { 
-          setStateCode(data.results[0].components.state_code)
-          setTown(data.results[0].components.town)
+          setLocation({
+            stateCode: data.results[0].components.state_code,
+            city: data.results[0].components.town
+          })
         } else { 
-          alert("Geolocation request failed.") 
+          alert("Geolocation request failed.")
         }
       })
       .catch((error) => alert(error)); 
     }
 
-  function success(position: PositionProps) { 
-    const latitude = position.coords.latitude
-    const longitude = position.coords.longitude
-    
-    getLocationInfo(latitude, longitude)
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function errors(err: any) { console.warn(`ERROR(${err.code}): ${err.message}`); }
-
   useEffect(() => { 
+    const options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0, }
+
+    function success(position: PositionProps) { 
+      const latitude = position.coords.latitude
+      const longitude = position.coords.longitude
+      
+      getLocationInfo(latitude, longitude)
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    function errors() { alert("Não foi possível acessar a localização"); }
+
     if (navigator.geolocation) { 
       navigator.permissions.query({ name: "geolocation" }) 
       .then((result: GeoLocationResultType) => { 
-        console.log(result); 
-        if (result.state === 'granted') {
-          return navigator.geolocation.getCurrentPosition(success, errors, options)
-        } else if (result.state === 'prompt') {
-          return navigator.geolocation.getCurrentPosition(success, errors, options)
-        } else if (result.state === 'denied') {
-          console.log('Geolocation not available')
-      }
-    }) 
-    } else { 
-      console.log("Geolocation is not supported by this browser.")
-    } 
-  });
+        switch (result.state) {
+          case 'granted':
+            return navigator.geolocation.getCurrentPosition(success, errors, options)
+          case 'prompt':
+            return navigator.geolocation.getCurrentPosition(success, errors, options)
+          case 'denied':
+            return alert('Geolocation not available')
+        }
+      }) } else { 
+        alert("Geolocalização não disponível nesse navegador")
+      } 
+  }, [])
 
   return (
     <HeaderContainer>
@@ -77,10 +80,17 @@ export function Header() {
       </NavLink>
 
       <nav>
-        <div className='location'>
-          <MapPin size={22} weight='fill' />
-          <span>{town}, {stateCode}</span>
-        </div>
+          {location ? 
+            <LocationCardGranted>
+              <MapPin size={22} weight='fill' />
+              <span>{location.city}, {location.stateCode}</span>
+            </LocationCardGranted>
+            : 
+            <LocationCardDenied>
+              <XCircle size={22} weight='fill' />
+              <span>Localização não autorizada</span>
+            </LocationCardDenied>
+          }
         <NavLink to='/checkout'>
           <div className='cart'>
             <ShoppingCart size={22} weight='fill' />
