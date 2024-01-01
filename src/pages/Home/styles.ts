@@ -45,7 +45,7 @@ export const CharacteristicsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);  
   grid-template-rows: repeat(2, 1fr);
-  gap: 2rem;
+  gap: 0.5rem;
 `
 
 export const ItemsWrapper = styled.div`
@@ -88,4 +88,19 @@ export const CoffeeLogo = styled(BaseLogoContainer)`
 
 export const CoffeeDeliveryMainImage = styled.img`
   max-width: 580px;
+`
+// Estilização da lista de cafés
+
+export const CoffeeListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3.375rem;
+  margin-top: 1rem;
+
+  strong {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.3;
+  }
 `

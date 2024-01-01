@@ -73,6 +73,10 @@ export function Header() {
       } 
   }, [])
 
+  useEffect(() => {
+    
+  }, [])
+
   return (
     <HeaderContainer>
       <NavLink to='/'>
@@ -80,16 +84,16 @@ export function Header() {
       </NavLink>
 
       <nav>
-          {location ? 
-            <LocationCardGranted>
-              <MapPin size={22} weight='fill' />
-              <span>{location.city}, {location.stateCode}</span>
-            </LocationCardGranted>
-            : 
+          {location === undefined ? 
             <LocationCardDenied>
               <XCircle size={22} weight='fill' />
               <span>Localização não autorizada</span>
             </LocationCardDenied>
+            : 
+            <LocationCardGranted>
+              <MapPin size={22} weight='fill' />
+              <span>{location.city}, {location.stateCode}</span>
+            </LocationCardGranted>
           }
         <NavLink to='/checkout'>
           <div className='cart'>

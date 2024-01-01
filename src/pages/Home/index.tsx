@@ -12,10 +12,13 @@ import {
   TimerLogo,
   CoffeeLogo,
   ItemsWrapper,
-} from "./styles"
+  CoffeeListContainer,
+  } from "./styles"
+import { CoffeeCard } from "./components/CoffeeCard"
 
 export function Home() {
   return (
+    <>
     <MainContainer>
         <Separator>
           <SloganContainer>
@@ -56,5 +59,12 @@ export function Home() {
 
         <CoffeeDeliveryMainImage src={coffeeDeliveryImage} alt="" />
       </MainContainer>
+
+      <CoffeeListContainer>
+        <strong>Nossos cafés</strong>
+
+        <CoffeeCard />
+      </CoffeeListContainer>
+      </>
   )
 }
