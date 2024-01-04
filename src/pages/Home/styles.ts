@@ -97,7 +97,7 @@ export const CoffeeListContainer = styled.div`
   gap: 3.375rem;
   margin-top: 1rem;
 
-  strong {
+  h1 {
     font-family: 'Baloo 2', sans-serif;
     font-size: 2rem;
     font-weight: 800;
