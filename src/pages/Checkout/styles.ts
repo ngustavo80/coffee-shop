@@ -16,6 +16,30 @@ export const CheckoutContainer = styled.main`
   }
 `
 
+const FormTitle = styled.legend`
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  
+  div {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2px;
+
+    strong {
+      color: ${props => props.theme['gray-800']};
+      line-height: 1.3;
+    }
+
+    span {
+      color: ${props => props.theme['gray-700']};
+      font-size: 0.875rem;
+      line-height: 1.3;
+    }
+  }
+`
+
 export const AddressPaymentWrapper = styled.section`
   display: flex;
   flex-direction: column;
@@ -27,17 +51,11 @@ export const Address = styled.div`
   border-radius: 6px;
 
   background: ${props => props.theme['gray-200']};
+`
 
-  legend {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    
-    div {
-      display: flex;
-      flex-direction: column;
-      padding-top: 2px;
-    }
+export const AddressFormTitle = styled(FormTitle)`
+  svg {
+    color: ${props => props.theme['yellow-800']};
   }
 `
 
@@ -50,23 +68,65 @@ export const Payment = styled.div`
   border-radius: 6px;
 
   background: ${props => props.theme['gray-200']};
+`
 
-  legend {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    
-    div {
-      display: flex;
-      flex-direction: column;
-      padding-top: 2px;
-    }
+export const PaymentFormTitle = styled(FormTitle)`
+  svg {
+    color: ${props => props.theme['purple-400']};
   }
 `
 
-export const PaymentForm = styled.fieldset``
+export const PaymentForm = styled.fieldset`
+  display: flex;
+  border: none;
+  gap: 0.75rem;
 
-export const RadioInputWrapper = styled.label`
+  /* :last-child {
+    margin-right: 0;
+  } */
+`
+
+export const RadioInputWrapper = styled.div`
+  /* margin-right: 0.75rem; */
+  border-radius: 6px;
+  display: flex;
+  flex-grow: 1;
+
+  background: ${props => props.theme['gray-400']};
+
+  label {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 6px;
+    width: 100%;
+
+    p {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: ${props => props.theme['gray-700']};
+    }
+
+    svg {
+      color: ${props => props.theme['purple-400']}
+    }
+  }
+
+
+  input[type="radio"] {
+    appearance: none;
+    display: none;
+  }
+
+  input[type="radio"]:checked + label {
+    background: ${props => props.theme['purple-100']};
+    outline: 1px solid ${props => props.theme['purple-800']};
+  }
+
+  input[type="radio"]:focus {
+    box-shadow: none;
+  }
 `
 
 export const ConfirmOrderWrapper = styled.section`

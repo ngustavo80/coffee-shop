@@ -2,12 +2,14 @@ import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from "@phosphor-i
 import { 
   Address, 
   AddressForm, 
+  AddressFormTitle, 
   AddressPaymentWrapper, 
   CheckoutContainer, 
   ConfirmOrder, 
   ConfirmOrderWrapper, 
   Payment, 
   PaymentForm, 
+  PaymentFormTitle,
   RadioInputWrapper
 } from "./styles";
 
@@ -19,13 +21,13 @@ export function Checkout () {
           <h1>Complete seu pedido</h1>
           <AddressPaymentWrapper>
             <Address>
-              <legend>
+              <AddressFormTitle>
                   <MapPinLine size={22} />
                 <div>
                   <strong>Endereço de entrega</strong>
                   <span>Informe o endereço em que deseja receber seu pedido</span>
                 </div>
-              </legend>
+              </AddressFormTitle>
 
               <AddressForm>
                 <input type="text" placeholder="CEP" />
@@ -39,31 +41,37 @@ export function Checkout () {
             </Address>
 
             <Payment>
-              <legend>
+              <PaymentFormTitle>
                   <CurrencyDollar size={22} />
                 <div>
                   <strong>Pagamento</strong>
                   <span>O pagamento é feito na entrega.Escolha a forma que deseja pagar.</span>
                 </ div>
-              </legend>
+              </PaymentFormTitle>
 
               <PaymentForm>
-                <RadioInputWrapper htmlFor="creditCard">
+                <RadioInputWrapper>
                   <input type="radio" name="paymentMethod" id="creditCard" value="creditCard" />
+                  <label htmlFor="creditCard">
                     <CreditCard size={16} />
                     <p>Cartão de crédito</p>
+                  </label>
                 </RadioInputWrapper>
 
-                <RadioInputWrapper htmlFor="debitCard">
-                  <input type="radio" name="paymentMethod" id="debitCard" value="debitCard" />
-                  <Bank size={16} />
-                  <p>Cartão de débito</p>
+                <RadioInputWrapper>
+                  <input type="radio" name="paymentMethod" id="debitCard" value="debitCard" />  
+                  <label htmlFor="debitCard">
+                    <Bank size={16} />
+                    <p>Cartão de débito</p>
+                  </label>
                 </RadioInputWrapper>
 
-                <RadioInputWrapper htmlFor="currency">
+                <RadioInputWrapper>
                   <input type="radio" name="paymentMethod" id="currency" value="currency" />
-                  <Money size={16} />
-                  <p>Dinheiro</p>
+                  <label htmlFor="currency">
+                    <Money size={16} />
+                    <p>Dinheiro</p>
+                  </label>
                 </RadioInputWrapper>
                 
               </PaymentForm>
