@@ -30,13 +30,17 @@ export function Checkout () {
               </AddressFormTitle>
 
               <AddressForm>
-                <input type="text" placeholder="CEP" />
-                <input type="text" placeholder="Rua" />
-                <input type="text" placeholder="Número" />
-                <input type="text" placeholder="Complemento" />
-                <input type="text" placeholder="Bairro" />
-                <input type="text" placeholder="Cidade" />
-                <input type="text" placeholder="UF" />
+                <input type="text" placeholder="CEP" name="zipCode" />
+                <input type="text" placeholder="Rua" name="Street" />
+                <div>
+                  <input type="text" placeholder="Número" name="number" />
+                  <input type="text" placeholder="Complemento" name="complement" />
+                </div>
+                <div>
+                  <input type="text" placeholder="Bairro" name="neighborhood" />
+                  <input type="text" placeholder="Cidade" name="city" />
+                  <input type="text" placeholder="UF" name="state" />
+                </div>
               </AddressForm>
             </Address>
 
