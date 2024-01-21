@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom'
 import { ShoppingCart } from '@phosphor-icons/react'
 
-
-
+import { Counter } from '../../../../components/Counter'
 import { coffees } from '../../../../coffees'
+
+import { formatCents } from '../../../../utils/formatCents'
 
 import { 
   CoffeeWrapper, 
@@ -12,35 +13,21 @@ import {
   BuyContainer, 
   Price, 
   Buy } from "./styles"
-import { CoffeeCounter } from '../../../../components/CoffeeCounter'
 
 export function CoffeeList() {
   return (
     <CoffeeWrapper>
       {coffees.map(coffee => {
-        const cents = String(coffee.price.cents).padEnd(2, '0')
+        // const cents = String(coffee.price.cents).padEnd(2, '0')
 
         return (
           <CoffeeCard key={coffee.id}>
             <img src={coffee.image} alt={coffee.description} />
 
             <Tags>
-              { coffee.characteristics.length === 3 
-              ? 
-              <>
-                <span>{coffee.characteristics[0]}</span>
-                <span>{coffee.characteristics[1]}</span>
-                <span>{coffee.characteristics[2]}</span>
-              </>
-              : coffee.characteristics.length === 2 
-              ? 
-              <>
-                <span>{coffee.characteristics[0]}</span>
-                <span>{coffee.characteristics[1]}</span>
-              </>
-              :
-              <span>{coffee.characteristics[0]}</span>
-            }
+              {coffee.tags.map(tag => {
+                return <span key={tag.id}>{tag.characteristic}</span>
+              })}
             </Tags>
 
             <strong>{coffee.name}</strong>
@@ -49,11 +36,11 @@ export function CoffeeList() {
             <BuyContainer>
               <Price>
                 <p>R$</p>
-                <span>{coffee.price.currency},{cents}</span>
+                <span>{coffee.price.currency},{formatCents(coffee.price.cents)}</span>
               </Price>
 
               <Buy>
-                <CoffeeCounter />
+                <Counter />
 
                 <NavLink to="/checkout">
                   <ShoppingCart size={22} weight='fill' />

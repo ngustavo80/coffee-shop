@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-export const CoffeeCounterContainer = styled.div`
+export const CounterContainer = styled.div`
   display: flex;
+  width: 5rem;
   padding: 0.5rem;
   border-radius: 8px;
   background: ${props => props.theme['gray-400']};

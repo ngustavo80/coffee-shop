@@ -1,9 +1,9 @@
 import { Minus, Plus } from '@phosphor-icons/react'
 import { Button, HStack, Input, useNumberInput } from '@chakra-ui/react'
 
-import { CoffeeCounterContainer } from './styles'
+import { CounterContainer } from './styles'
 
-export function CoffeeCounter() {
+export function Counter() {
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
     useNumberInput({
       step: 1,
@@ -16,7 +16,7 @@ export function CoffeeCounter() {
   const input = getInputProps() 
 
   return (
-    <CoffeeCounterContainer>
+    <CounterContainer>
       <HStack>
         <Button {...decrement}>
           <Minus size={14} />  
@@ -26,6 +26,6 @@ export function CoffeeCounter() {
           <Plus size={14} />
         </Button>
       </HStack>
-    </ CoffeeCounterContainer>
+    </ CounterContainer>
   )
 }

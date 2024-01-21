@@ -9,7 +9,6 @@ export const CheckoutContainer = styled.main`
       font-family: 'Baloo 2', sans-serif;
       font-size: 1.125rem;
       font-weight: 700;
-      line-height: 1.3;
       margin:  2.5rem 0 1rem 0;
       color: ${props => props.theme['gray-800']}
     }
@@ -29,13 +28,11 @@ const FormTitle = styled.legend`
 
     strong {
       color: ${props => props.theme['gray-800']};
-      line-height: 1.3;
     }
 
     span {
       color: ${props => props.theme['gray-700']};
       font-size: 0.875rem;
-      line-height: 1.3;
     }
   }
 `
@@ -46,6 +43,7 @@ export const AddressPaymentWrapper = styled.section`
   gap: 0.75rem;
 `
 
+// --------------------------ADDRESS FORM--------------------------------
 export const Address = styled.div`
   padding: 2.5rem;
   border-radius: 6px;
@@ -94,7 +92,10 @@ export const AddressForm = styled.fieldset`
     flex: 1;
   }
 `
+// ----------------------------------------------------------------------------
 
+
+// --------------------------PAYMENTFORM----------------------------------------
 export const Payment = styled.div`
   padding: 2.5rem;
   border-radius: 6px;
@@ -121,6 +122,7 @@ export const RadioInputWrapper = styled.div`
 
   background: ${props => props.theme['gray-400']};
 
+
   label {
     padding: 1rem;
     display: flex;
@@ -128,6 +130,7 @@ export const RadioInputWrapper = styled.div`
     gap: 0.75rem;
     border-radius: 6px;
     width: 100%;
+    cursor: pointer;
 
     p {
       text-transform: uppercase;
@@ -155,15 +158,81 @@ export const RadioInputWrapper = styled.div`
     box-shadow: none;
   }
 `
+// ----------------------------------------------------------------------------
 
 export const ConfirmOrderWrapper = styled.section`
-  width: 29rem;
+  width: 28rem;
   padding: 2.5rem;
-  border-radius: 0 100px 0 100px;
+  border-radius: 6px 44px;
 
   background: ${props => props.theme['gray-200']};
 `
 
-export const ConfirmOrder = styled.div`
-   
+export const CoffeeCart = styled.div`
+   display: flex;
+   align-items: center;
+   gap: 1.25rem;
+
+   img {
+    width: 4rem;
+   }
+`
+
+export const SelectedCoffee = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`
+
+export const Info = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    font-family: 'Roboto', sans-serif;
+    color: ${props => props.theme['gray-800']};
+  }
+
+  p {
+    color: ${props => props.theme['gray-700']};
+    font-weight: 700;
+  }
+`
+
+export const Buttons = styled.div`
+  display: flex;
+   gap: 0.5rem;
+`
+
+export const Remove = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  background: ${props => props.theme['gray-400']};
+  color: ${props => props.theme['gray-700']};
+
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  line-height: none;
+
+  text-transform: uppercase;
+  cursor: pointer;
+
+  svg {
+    color: ${props => props.theme['purple-400']}
+  }
+`
+
+export const Separator = styled.div`
+  width: 100%;
+  height: 2px;
+
+  margin: 1.5rem 0 1.5rem 0;
+
+  background: ${props => props.theme['gray-400']};
 `

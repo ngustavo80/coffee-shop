@@ -44,10 +44,12 @@ export function Header() {
     const options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
     
     function onSuccess (position: PositionProps) { 
-      const latitude = position.coords.latitude
-      const longitude = position.coords.longitude
+      const coordinates = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      }
       
-      getLocationInfo(latitude, longitude)
+      getLocationInfo(coordinates.latitude, coordinates.longitude)
     }
     
     function onError() { alert("Não foi possível acessar a localização"); }

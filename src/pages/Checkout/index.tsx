@@ -1,17 +1,33 @@
-import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from "@phosphor-icons/react";
+import { 
+  Bank, 
+  CreditCard, 
+  CurrencyDollar,  
+  MapPinLine, 
+  Money,
+  Trash
+} from "@phosphor-icons/react";
 import { 
   Address, 
   AddressForm, 
   AddressFormTitle, 
   AddressPaymentWrapper, 
   CheckoutContainer, 
-  ConfirmOrder, 
+  CoffeeCart, 
+  SelectedCoffee, 
   ConfirmOrderWrapper, 
   Payment, 
   PaymentForm, 
   PaymentFormTitle,
-  RadioInputWrapper
+  RadioInputWrapper,
+  Remove,
+  Separator,
+  Buttons,
+  Info,  
 } from "./styles";
+
+import { coffees } from "../../coffees"
+import { Counter } from "../../components/Counter";
+import { formatCents } from "../../utils/formatCents";
 
 export function Checkout () {
   return (
@@ -77,7 +93,6 @@ export function Checkout () {
                     <p>Dinheiro</p>
                   </label>
                 </RadioInputWrapper>
-                
               </PaymentForm>
             </Payment>
           </AddressPaymentWrapper>
@@ -86,8 +101,54 @@ export function Checkout () {
         <section>
           <h1>Cafés selecionados</h1>
           <ConfirmOrderWrapper>
-            
-            <ConfirmOrder></ConfirmOrder>
+
+          <CoffeeCart>
+              <img src={coffees[0].image} alt="" />
+              <SelectedCoffee>
+                <Info>
+                  <span>
+                    {coffees[0].name}
+                  </span>
+                  <p>
+                    {`R$ ${coffees[0].price.currency},${formatCents(coffees[0].price.cents)}`}
+                  </p>
+                </Info>
+
+                <Buttons>
+                  <Counter />
+                  <Remove type="button">
+                    <Trash size={16} />
+                    REMOVER
+                  </Remove>
+                </Buttons>
+              </SelectedCoffee>
+            </CoffeeCart>
+            <Separator />
+
+            <CoffeeCart>
+              <img src={coffees[4].image} alt="" />
+              <SelectedCoffee>
+                <Info>
+                  <span>
+                    {coffees[4].name}
+                  </span>
+                  <p>
+                    {`R$ ${coffees[4].price.currency},${formatCents(coffees[4].price.cents)}`}
+                  </p>
+                </Info>
+
+                <Buttons>
+                  <Counter />
+                  <Remove type="button">
+                    <Trash size={16} />
+                    REMOVER
+                  </Remove>
+                </Buttons>
+              </SelectedCoffee>
+            </CoffeeCart>
+            <Separator />
+
+
           </ConfirmOrderWrapper>
         </section>
       </form>
