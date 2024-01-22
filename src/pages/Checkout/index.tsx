@@ -1,3 +1,6 @@
+import { coffees } from "../../coffees"
+import { Counter } from "../../components/Counter";
+import { formatCents } from "../../utils/formatCents";
 import { 
   Bank, 
   CreditCard, 
@@ -6,6 +9,7 @@ import {
   Money,
   Trash
 } from "@phosphor-icons/react";
+
 import { 
   Address, 
   AddressForm, 
@@ -22,12 +26,11 @@ import {
   Remove,
   Separator,
   Buttons,
-  Info,  
+  Info,
+  FinishDetails,
+  Total,
+  ConfirmButton,  
 } from "./styles";
-
-import { coffees } from "../../coffees"
-import { Counter } from "../../components/Counter";
-import { formatCents } from "../../utils/formatCents";
 
 export function Checkout () {
   return (
@@ -148,7 +151,25 @@ export function Checkout () {
             </CoffeeCart>
             <Separator />
 
+            <FinishDetails>
+              <div>
+                <p>Total de itens</p>
+                <p>R$ 30,00</p>
+              </div>
+              <div>
+                <p>Entrega (taxa fixa)</p>
+                <p>R$ 5,00</p>
+              </div>
 
+              <Total>
+                <strong>Total</strong>
+                <strong>R$ 35,00</strong>
+              </Total>
+
+              <ConfirmButton type="submit">
+                CONFIRMAR PEDIDO
+              </ConfirmButton>
+            </FinishDetails>
           </ConfirmOrderWrapper>
         </section>
       </form>

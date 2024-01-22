@@ -210,7 +210,7 @@ export const coffees: CoffeeType[] = [
       { id: "21489156489156126485", characteristic: "Alcoólico" }, 
       { id: "15612546315648951655", characteristic: "Gelado"}
     ],
-    description: "Drink gelado de café expresso com rum, creme mde leite e hortelã",
+    description: "Drink gelado de café expresso com rum, creme de leite e hortelã",
     price: {
       currency: 15,
       cents: 0,
@@ -225,18 +225,6 @@ export const coffees: CoffeeType[] = [
     description: "Bebida adocicada preparada com café e leite de coco",
     price: {
       currency: 12,
-      cents: 0,
-    },
-    quantity: 0,
-  },
-  {
-    id: 15,
-    name: "Expresso Tradicional",
-    image: Expresso,
-    tags: [{ id: "34821674829173482167458921", characteristic: "Tradicional" }],
-    description: "O tradicional café feito com água quente e grãos moídos",
-    price: {
-      currency: 5,
       cents: 0,
     },
     quantity: 0,

@@ -1,3 +1,3 @@
-export function formatCents(coffeeCents: number) {
-  return String(coffeeCents).padEnd(2, '0')
+export function formatCents(cents: number) {
+  return String(cents).padEnd(2, '0')
 }

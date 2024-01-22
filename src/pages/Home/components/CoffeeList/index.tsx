@@ -36,7 +36,9 @@ export function CoffeeList() {
             <BuyContainer>
               <Price>
                 <p>R$</p>
-                <span>{coffee.price.currency},{formatCents(coffee.price.cents)}</span>
+                <span>
+                  {coffee.price.currency},{formatCents(coffee.price.cents)}
+                </span>
               </Price>
 
               <Buy>

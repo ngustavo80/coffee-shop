@@ -80,7 +80,7 @@ export const AddressForm = styled.fieldset`
   }
 
   input[name="zipCode"], input[name="number"], input[name="neighborhood"] {
-    max-width: 12.5rem;
+    width: 6rem;
   }
 
   input[name="state"] {
@@ -235,4 +235,49 @@ export const Separator = styled.div`
   margin: 1.5rem 0 1.5rem 0;
 
   background: ${props => props.theme['gray-400']};
+`
+export const FinishDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  
+  div {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      font-size: 0.875rem;
+      color: ${props => props.theme['gray-700']};
+    }
+  }
+`
+
+export const Total = styled.div`
+ strong {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: ${props => props.theme['gray-800']};
+ }
+`
+
+export const ConfirmButton = styled.button`
+  background: ${props => props.theme['yellow-400']};
+  color: ${props => props.theme['white']};
+
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 6px;
+
+  font-size: 0.875rem;
+  font-weight: 700;
+
+  cursor: pointer;
+  text-transform: uppercase;
+
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `
