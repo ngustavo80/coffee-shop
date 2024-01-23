@@ -154,7 +154,7 @@ export function Checkout () {
             <FinishDetails>
               <div>
                 <p>Total de itens</p>
-                <p>R$ 30,00</p>
+                <p>R$ 19,00</p>
               </div>
               <div>
                 <p>Entrega (taxa fixa)</p>
@@ -163,7 +163,7 @@ export function Checkout () {
 
               <Total>
                 <strong>Total</strong>
-                <strong>R$ 35,00</strong>
+                <strong>R$ 24,00</strong>
               </Total>
 
               <ConfirmButton type="submit">

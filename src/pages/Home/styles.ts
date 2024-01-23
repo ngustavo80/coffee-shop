@@ -60,11 +60,8 @@ export const ItemsWrapper = styled.div`
   }
 `
 
-export const BaseLogoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+const BaseLogoContainer = styled.div`
+  height: 2rem;
   padding: 0.5rem;
   border-radius: 50%;
 
