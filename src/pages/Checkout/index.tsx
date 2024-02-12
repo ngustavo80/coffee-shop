@@ -1,4 +1,6 @@
-import { FormEvent } from "react"
+import { FormProvider, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
 import { coffees } from "../../coffees"
 
 import { Counter } from "../../components/Counter"
@@ -29,15 +31,46 @@ import {
   ConfirmButton,  
 } from "./styles"
 
-
 export function Checkout () {
-  function handleFormSubmit(event: FormEvent) {
-    event.preventDefault()
+  const checkoutFormValidationSchema = zod.object({
+    zipCode: zod.string()
+      .min(8, 'Por favor, informe o CEP corretamente')
+      .max(9, 'Por favor, informe o CEP corretamente'),
+    street: zod.string().min(1, 'Campo obrigatório'),
+    number: zod.string().min(1, 'Campo obrigatório'),
+    complement: zod.string().optional(),
+    neighborhood: zod.string().min(1, 'Campo obrigatório'),
+    city: zod.string().min(1, 'Campo obrigatório'),
+    state: zod.string().min(2, 'Campo obrigatório').max(2),
+    paymentMethod: zod.string().min(1, 'Campo obrigatório').max(50),
+  })
+
+  type addressFormData = zod.infer<typeof checkoutFormValidationSchema>
+
+  const checkoutForm = useForm<addressFormData>({
+    resolver: zodResolver(checkoutFormValidationSchema),
+    defaultValues: {
+      zipCode: '',
+      street: '',
+      number: '',
+      complement: '',
+      neighborhood: '',
+      city: '',
+      state: '',
+      paymentMethod: 'creditCard'
+    }
+  })
+
+  const { handleSubmit } = checkoutForm
+
+  function handleCheckoutFormSubmit(data: addressFormData) {
+    console.log(data)
   }
 
   return (
     <CheckoutContainer>
-      <form onSubmit={handleFormSubmit}>
+      <form id="checkoutForm" onSubmit={handleSubmit(handleCheckoutFormSubmit)}>
+      <FormProvider {...checkoutForm} >
         <section>
           <h1>Complete seu pedido</h1>
           <AddressPaymentWrapper>
@@ -51,6 +84,7 @@ export function Checkout () {
               </AddressFormTitle>
 
               <AddressForm />
+
             </Fieldset>
 
             <Fieldset>
@@ -61,86 +95,86 @@ export function Checkout () {
                   <span>O pagamento é feito na entrega.Escolha a forma que deseja pagar.</span>
                 </ div>
               </PaymentFormTitle>
-
-              <PaymentForm />
+                <PaymentForm />
             </Fieldset>
           </AddressPaymentWrapper>
         </section>
+      </FormProvider>
+      </form>
 
-        <section>
-          <h1>Cafés selecionados</h1>
-          <ConfirmOrderWrapper>
+      <section>
+        <h1>Cafés selecionados</h1>
+        <ConfirmOrderWrapper>
+
+        <SelectedCoffeeList>
+            <img src={coffees[0].image} alt="" />
+            <SelectedCoffee>
+              <Info>
+                <span>
+                  {coffees[0].name}
+                </span>
+                <p>
+                  {`R$ ${coffees[0].price}`}
+                </p>
+              </Info>
+
+              <Buttons>
+                <Counter />
+                <Remove type="button">
+                  <Trash size={16} />
+                  REMOVER
+                </Remove>
+              </Buttons>
+            </SelectedCoffee>
+          </SelectedCoffeeList>
+
+          <Separator />
 
           <SelectedCoffeeList>
-              <img src={coffees[0].image} alt="" />
-              <SelectedCoffee>
-                <Info>
-                  <span>
-                    {coffees[0].name}
-                  </span>
-                  <p>
-                    {`R$ ${coffees[0].price}`}
-                  </p>
-                </Info>
+            <img src={coffees[4].image} alt="" />
+            <SelectedCoffee>
+              <Info>
+                <span>
+                  {coffees[4].name}
+                </span>
+                <p>
+                  {`R$ ${coffees[4].price}`}
+                </p>
+              </Info>
 
-                <Buttons>
-                  <Counter />
-                  <Remove type="button">
-                    <Trash size={16} />
-                    REMOVER
-                  </Remove>
-                </Buttons>
-              </SelectedCoffee>
-            </SelectedCoffeeList>
+              <Buttons>
+                <Counter />
+                <Remove type="button">
+                  <Trash size={16} />
+                  REMOVER
+                </Remove>
+              </Buttons>
+            </SelectedCoffee>
+          </SelectedCoffeeList>
 
-            <Separator />
+          <Separator />
 
-            <SelectedCoffeeList>
-              <img src={coffees[4].image} alt="" />
-              <SelectedCoffee>
-                <Info>
-                  <span>
-                    {coffees[4].name}
-                  </span>
-                  <p>
-                    {`R$ ${coffees[4].price}`}
-                  </p>
-                </Info>
+          <FinishDetails>
+            <div>
+              <p>Total de itens</p>
+              <p>R$ 19,00</p>
+            </div>
+            <div>
+              <p>Entrega (taxa fixa)</p>
+              <p>R$ 5,00</p>
+            </div>
 
-                <Buttons>
-                  <Counter />
-                  <Remove type="button">
-                    <Trash size={16} />
-                    REMOVER
-                  </Remove>
-                </Buttons>
-              </SelectedCoffee>
-            </SelectedCoffeeList>
+            <Total>
+              <strong>Total</strong>
+              <strong>R$ 24,00</strong>
+            </Total>
 
-            <Separator />
-
-            <FinishDetails>
-              <div>
-                <p>Total de itens</p>
-                <p>R$ 19,00</p>
-              </div>
-              <div>
-                <p>Entrega (taxa fixa)</p>
-                <p>R$ 5,00</p>
-              </div>
-
-              <Total>
-                <strong>Total</strong>
-                <strong>R$ 24,00</strong>
-              </Total>
-
-              <ConfirmButton type="submit">
-                CONFIRMAR PEDIDO
-              </ConfirmButton>
-            </FinishDetails>
-          </ConfirmOrderWrapper>
-        </section>
-      </form>
+            <ConfirmButton type="submit" form="checkoutForm">
+              CONFIRMAR PEDIDO
+            </ConfirmButton>
+          </FinishDetails>
+        </ConfirmOrderWrapper>
+      </section>
     </CheckoutContainer>
   )
 }

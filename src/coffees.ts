@@ -18,7 +18,7 @@ interface TagsType {
   characteristic: string,
 }
 
-interface CoffeeType {
+export interface CoffeeType {
   id: string;
   name: string;
   image: string;
@@ -37,7 +37,7 @@ export const coffees: CoffeeType[] = [
     tags: [{ id: crypto.randomUUID(), characteristic: "Tradicional" }],
     description: "O tradicional café feito com água quente e grãos moídos",
     price: '10,00',
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: crypto.randomUUID(),
@@ -46,7 +46,7 @@ export const coffees: CoffeeType[] = [
     tags: [{ id: crypto.randomUUID(), characteristic: "Tradicional"}],
     description: "Expresso diluído, menos intenso que o tradicional",
     price: '10,00',
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: crypto.randomUUID(),
@@ -58,7 +58,7 @@ export const coffees: CoffeeType[] = [
     ],
     description: "Meio a meio de expresso tradicional com leite vaporizado",
     price: '10,00',
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: crypto.randomUUID(),
@@ -70,7 +70,7 @@ export const coffees: CoffeeType[] = [
     ],
     description: "Uma dose de café expresso com o dobro de leite e espuma cremosa",
     price: '10,00',
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: crypto.randomUUID(),
@@ -82,7 +82,7 @@ export const coffees: CoffeeType[] = [
     ],
     description: "Café expresso com calda de chocolate, pouco leite e espuma",
     price: '10,00',
-    quantity: 0,
+    quantity: 1,
   },
   {
     id: crypto.randomUUID(),
@@ -94,7 +94,7 @@ export const coffees: CoffeeType[] = [
     ],
     description: "Bebida feita com chocolate dissolvido no leite quente e café",
     price: '10,00',
-    quantity: 0,
+    quantity: 1,
   },
   {
     id:crypto.randomUUID(),
@@ -103,7 +103,7 @@ export const coffees: CoffeeType[] = [
     tags: [{ id: crypto.randomUUID(), characteristic: "Especial" }],
     description: "Bebida preparada com grãos de café árabe e especiarias",
     price: '10,00',
-    quantity: 0,
+    quantity: 1,
   },
   {
     id:crypto.randomUUID(),
@@ -115,7 +115,7 @@ export const coffees: CoffeeType[] = [
     ],
     description: "Bebida a base de café, uísque irlândes, açúcar e chantilly",
     price: '10,00',
-    quantity: 0,
+    quantity: 1,
   },
   {
     id:crypto.randomUUID(),
@@ -124,7 +124,7 @@ export const coffees: CoffeeType[] = [
     tags: [{ id: crypto.randomUUID(), characteristic: "Tradicional" }],
     description: "Café expresso tradicional com espuma cremosa",
     price: '10,00',
-    quantity: 0,
+    quantity: 1,
   },
   {
     id:crypto.randomUUID(),
@@ -136,7 +136,7 @@ export const coffees: CoffeeType[] = [
     ],
     description: "Bebida preparada com café expresso e cubos de gelo",
     price: '10,00',
-    quantity: 0,
+    quantity: 1,
   },
   {
     id:crypto.randomUUID(),
@@ -148,7 +148,7 @@ export const coffees: CoffeeType[] = [
     ],
     description: "Bebida com canela feita de doses iguais de café, leite e espuma",
     price: '10,00',
-    quantity: 0,
+    quantity: 1,
   },
   {
     id:crypto.randomUUID(),
@@ -160,7 +160,7 @@ export const coffees: CoffeeType[] = [
     ],
     description: "Café expresso misturado com um pouco de leite quente e espuma",
     price: '9,20',
-    quantity: 0,
+    quantity: 1,
   },
   {
     id:crypto.randomUUID(),
@@ -173,7 +173,7 @@ export const coffees: CoffeeType[] = [
     ],
     description: "Drink gelado de café expresso com rum, creme de leite e hortelã",
     price: '10,00',
-    quantity: 0,
+    quantity: 1,
   },
   {
     id:crypto.randomUUID(),
@@ -182,7 +182,7 @@ export const coffees: CoffeeType[] = [
     tags: [{ id: crypto.randomUUID(), characteristic: "Especial" }],
     description: "Bebida adocicada preparada com café e leite de coco",
     price: '10,00',
-    quantity: 0,
+    quantity: 1,
   }
 ]
 

@@ -39,7 +39,7 @@ export function CoffeeList() {
 
               <Buy>
                 <Counter />
-
+ 
                 <NavLink to="/checkout">
                   <ShoppingCart size={22} weight='fill' />
                 </NavLink>

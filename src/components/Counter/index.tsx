@@ -7,8 +7,8 @@ export function Counter() {
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
     useNumberInput({
       step: 1,
-      defaultValue: 1,
-      min: 1,
+      defaultValue: 0,
+      min: 0,
     })
 
   const increment = getIncrementButtonProps()

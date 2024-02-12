@@ -1,17 +1,15 @@
 import styled from "styled-components";
 
 export const CheckoutContainer = styled.main`
-  form {
-    display: flex;
-    gap: 2rem;
-    
-    h1 {
-      font-family: 'Baloo 2', sans-serif;
-      font-size: 1.125rem;
-      font-weight: 700;
-      margin:  2.5rem 0 1rem 0;
-      color: ${props => props.theme['gray-800']}
-    }
+  display: flex;
+  gap: 2rem;
+
+  h1 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin:  2.5rem 0 1rem 0;
+    color: ${props => props.theme['gray-800']}
   }
 `
 

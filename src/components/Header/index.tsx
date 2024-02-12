@@ -73,8 +73,6 @@ export function Header() {
     const LocalStorageLocation = JSON.stringify(location)
     
     localStorage.setItem('@coffee-delivery:location-1.0.0', LocalStorageLocation)
-
-    console.log(LocalStorageLocation)
   }, [location])
 
   return (
