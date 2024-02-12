@@ -18,7 +18,15 @@ interface PositionProps {
 }
 
 export function Header() {
-  const [location, setLocation] = useState<LocationProps>()
+  const [location, setLocation] = useState<LocationProps>(() => {
+    const locationOnStorage = localStorage.getItem('@coffee-delivery:location-1.0.0')
+
+    if(locationOnStorage) {
+      return JSON.parse(locationOnStorage)
+    }
+    
+    return {}
+  })
   
   useEffect(() => {
     const APIkey = import.meta.env.VITE_API_KEY
@@ -61,19 +69,13 @@ export function Header() {
     }
   }, [])
 
-  // useEffect(() => {
-  //   const LocalStorageLocation = JSON.stringify(location)
+  useEffect(() => {
+    const LocalStorageLocation = JSON.stringify(location)
     
-  //   localStorage.setItem('@coffe-delivery:location-1.0.0', LocalStorageLocation)
+    localStorage.setItem('@coffee-delivery:location-1.0.0', LocalStorageLocation)
 
-  //   console.log(LocalStorageLocation)
-  // }, [location])
-
-  // const LocationStoredInLocalStorage = localStorage.getItem('@coffe-delivery:location-1.0.0')
-
-  // if (LocationStoredInLocalStorage) {
-  //   return JSON.parse(LocationStoredInLocalStorage)
-  // }
+    console.log(LocalStorageLocation)
+  }, [location])
 
   return (
     <HeaderContainer>

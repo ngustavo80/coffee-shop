@@ -1,28 +1,25 @@
+import { FormEvent } from "react"
 import { coffees } from "../../coffees"
-import { Counter } from "../../components/Counter";
-import { formatCents } from "../../utils/formatCents";
-import { 
-  Bank, 
-  CreditCard, 
-  CurrencyDollar,  
-  MapPinLine, 
-  Money,
-  Trash
-} from "@phosphor-icons/react";
+
+import { Counter } from "../../components/Counter"
+import { AddressForm } from "./components/AddressForm"
+import { PaymentForm } from "./components/PaymentForm"
 
 import { 
-  Address, 
-  AddressForm, 
+  CurrencyDollar,  
+  MapPinLine, 
+  Trash
+} from "@phosphor-icons/react"
+
+import { 
+  Fieldset, 
   AddressFormTitle, 
   AddressPaymentWrapper, 
   CheckoutContainer, 
-  CoffeeCart, 
+  SelectedCoffeeList, 
   SelectedCoffee, 
-  ConfirmOrderWrapper, 
-  Payment, 
-  PaymentForm, 
+  ConfirmOrderWrapper,  
   PaymentFormTitle,
-  RadioInputWrapper,
   Remove,
   Separator,
   Buttons,
@@ -30,16 +27,21 @@ import {
   FinishDetails,
   Total,
   ConfirmButton,  
-} from "./styles";
+} from "./styles"
+
 
 export function Checkout () {
+  function handleFormSubmit(event: FormEvent) {
+    event.preventDefault()
+  }
+
   return (
     <CheckoutContainer>
-      <form onSubmit={e => {e.preventDefault}}>
+      <form onSubmit={handleFormSubmit}>
         <section>
           <h1>Complete seu pedido</h1>
           <AddressPaymentWrapper>
-            <Address>
+            <Fieldset>
               <AddressFormTitle>
                   <MapPinLine size={22} />
                 <div>
@@ -48,22 +50,10 @@ export function Checkout () {
                 </div>
               </AddressFormTitle>
 
-              <AddressForm>
-                <input type="text" placeholder="CEP" name="zipCode" />
-                <input type="text" placeholder="Rua" name="Street" />
-                <div>
-                  <input type="text" placeholder="Número" name="number" />
-                  <input type="text" placeholder="Complemento" name="complement" />
-                </div>
-                <div>
-                  <input type="text" placeholder="Bairro" name="neighborhood" />
-                  <input type="text" placeholder="Cidade" name="city" />
-                  <input type="text" placeholder="UF" name="state" />
-                </div>
-              </AddressForm>
-            </Address>
+              <AddressForm />
+            </Fieldset>
 
-            <Payment>
+            <Fieldset>
               <PaymentFormTitle>
                   <CurrencyDollar size={22} />
                 <div>
@@ -72,32 +62,8 @@ export function Checkout () {
                 </ div>
               </PaymentFormTitle>
 
-              <PaymentForm>
-                <RadioInputWrapper>
-                  <input type="radio" name="paymentMethod" id="creditCard" value="creditCard" />
-                  <label htmlFor="creditCard">
-                    <CreditCard size={16} />
-                    <p>Cartão de crédito</p>
-                  </label>
-                </RadioInputWrapper>
-
-                <RadioInputWrapper>
-                  <input type="radio" name="paymentMethod" id="debitCard" value="debitCard" />  
-                  <label htmlFor="debitCard">
-                    <Bank size={16} />
-                    <p>Cartão de débito</p>
-                  </label>
-                </RadioInputWrapper>
-
-                <RadioInputWrapper>
-                  <input type="radio" name="paymentMethod" id="currency" value="currency" />
-                  <label htmlFor="currency">
-                    <Money size={16} />
-                    <p>Dinheiro</p>
-                  </label>
-                </RadioInputWrapper>
-              </PaymentForm>
-            </Payment>
+              <PaymentForm />
+            </Fieldset>
           </AddressPaymentWrapper>
         </section>
 
@@ -105,7 +71,7 @@ export function Checkout () {
           <h1>Cafés selecionados</h1>
           <ConfirmOrderWrapper>
 
-          <CoffeeCart>
+          <SelectedCoffeeList>
               <img src={coffees[0].image} alt="" />
               <SelectedCoffee>
                 <Info>
@@ -113,7 +79,7 @@ export function Checkout () {
                     {coffees[0].name}
                   </span>
                   <p>
-                    {`R$ ${coffees[0].price.currency},${formatCents(coffees[0].price.cents)}`}
+                    {`R$ ${coffees[0].price}`}
                   </p>
                 </Info>
 
@@ -125,10 +91,11 @@ export function Checkout () {
                   </Remove>
                 </Buttons>
               </SelectedCoffee>
-            </CoffeeCart>
+            </SelectedCoffeeList>
+
             <Separator />
 
-            <CoffeeCart>
+            <SelectedCoffeeList>
               <img src={coffees[4].image} alt="" />
               <SelectedCoffee>
                 <Info>
@@ -136,7 +103,7 @@ export function Checkout () {
                     {coffees[4].name}
                   </span>
                   <p>
-                    {`R$ ${coffees[4].price.currency},${formatCents(coffees[4].price.cents)}`}
+                    {`R$ ${coffees[4].price}`}
                   </p>
                 </Info>
 
@@ -148,7 +115,8 @@ export function Checkout () {
                   </Remove>
                 </Buttons>
               </SelectedCoffee>
-            </CoffeeCart>
+            </SelectedCoffeeList>
+
             <Separator />
 
             <FinishDetails>

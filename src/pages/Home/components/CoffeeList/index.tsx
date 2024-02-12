@@ -4,8 +4,6 @@ import { ShoppingCart } from '@phosphor-icons/react'
 import { Counter } from '../../../../components/Counter'
 import { coffees } from '../../../../coffees'
 
-import { formatCents } from '../../../../utils/formatCents'
-
 import { 
   CoffeeWrapper, 
   CoffeeCard, 
@@ -18,8 +16,6 @@ export function CoffeeList() {
   return (
     <CoffeeWrapper>
       {coffees.map(coffee => {
-        // const cents = String(coffee.price.cents).padEnd(2, '0')
-
         return (
           <CoffeeCard key={coffee.id}>
             <img src={coffee.image} alt={coffee.description} />
@@ -37,7 +33,7 @@ export function CoffeeList() {
               <Price>
                 <p>R$</p>
                 <span>
-                  {coffee.price.currency},{formatCents(coffee.price.cents)}
+                  {coffee.price}
                 </span>
               </Price>
 

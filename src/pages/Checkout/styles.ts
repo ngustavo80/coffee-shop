@@ -4,7 +4,7 @@ export const CheckoutContainer = styled.main`
   form {
     display: flex;
     gap: 2rem;
-
+    
     h1 {
       font-family: 'Baloo 2', sans-serif;
       font-size: 1.125rem;
@@ -15,7 +15,15 @@ export const CheckoutContainer = styled.main`
   }
 `
 
-const FormTitle = styled.legend`
+export const Fieldset = styled.fieldset`
+  padding: 2.5rem;
+  border-radius: 6px;
+  border: none;
+
+  background: ${props => props.theme['gray-200']};
+`
+
+const FormTitle = styled.span`
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
@@ -43,64 +51,10 @@ export const AddressPaymentWrapper = styled.section`
   gap: 0.75rem;
 `
 
-// --------------------------ADDRESS FORM--------------------------------
-export const Address = styled.div`
-  padding: 2.5rem;
-  border-radius: 6px;
-
-  background: ${props => props.theme['gray-200']};
-`
-
 export const AddressFormTitle = styled(FormTitle)`
   svg {
     color: ${props => props.theme['yellow-800']};
   }
-`
-
-export const AddressForm = styled.fieldset`
-  display: flex;
-  flex-direction: column;
-  border: none;
-  gap: 1rem;
-
-  div {
-    display: flex;
-    gap: 0.75rem;
-  }
-
-  input {
-    background: ${props => props.theme['gray-300']};
-
-    padding: 0.75rem;
-    border: 1px solid ${props => props.theme['gray-400']};
-    border-radius: 6px;
-
-    color: ${props => props.theme['gray-700']};
-    font-size: 0.875rem;
-  }
-
-  input[name="zipCode"], input[name="number"], input[name="neighborhood"] {
-    width: 6rem;
-  }
-
-  input[name="state"] {
-    max-width: 4rem;
-    text-transform: uppercase;
-  }
-
-  input[name="complement"], input[name="city"] {
-    flex: 1;
-  }
-`
-// ----------------------------------------------------------------------------
-
-
-// --------------------------PAYMENTFORM----------------------------------------
-export const Payment = styled.div`
-  padding: 2.5rem;
-  border-radius: 6px;
-
-  background: ${props => props.theme['gray-200']};
 `
 
 export const PaymentFormTitle = styled(FormTitle)`
@@ -108,57 +62,7 @@ export const PaymentFormTitle = styled(FormTitle)`
     color: ${props => props.theme['purple-400']};
   }
 `
-
-export const PaymentForm = styled.fieldset`
-  display: flex;
-  border: none;
-  gap: 0.75rem;
-`
-
-export const RadioInputWrapper = styled.div`
-  border-radius: 6px;
-  display: flex;
-  flex-grow: 1;
-
-  background: ${props => props.theme['gray-400']};
-
-
-  label {
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    border-radius: 6px;
-    width: 100%;
-    cursor: pointer;
-
-    p {
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      color: ${props => props.theme['gray-700']};
-    }
-
-    svg {
-      color: ${props => props.theme['purple-400']}
-    }
-  }
-
-
-  input[type="radio"] {
-    appearance: none;
-    display: none;
-  }
-
-  input[type="radio"]:checked + label {
-    background: ${props => props.theme['purple-100']};
-    outline: 1px solid ${props => props.theme['purple-800']};
-  }
-
-  input[type="radio"]:focus {
-    box-shadow: none;
-  }
-`
-// ----------------------------------------------------------------------------
+// ---------------------------CONFIRM ORDER-----------------------------------
 
 export const ConfirmOrderWrapper = styled.section`
   width: 28rem;
@@ -168,7 +72,7 @@ export const ConfirmOrderWrapper = styled.section`
   background: ${props => props.theme['gray-200']};
 `
 
-export const CoffeeCart = styled.div`
+export const SelectedCoffeeList = styled.div`
    display: flex;
    align-items: center;
    gap: 1.25rem;
