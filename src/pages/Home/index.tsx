@@ -1,6 +1,6 @@
 import { Coffee, Package, ShoppingCart, Timer } from "@phosphor-icons/react"
 
-import { CoffeeList } from "./components/CoffeeList"
+import { CoffeeList } from '../../components/CoffeeList'
 
 import coffeeDeliveryImage from "../../assets/coffeeDelivery.svg"
 import { 
@@ -63,8 +63,7 @@ export function Home() {
 
       <CoffeeListContainer>
         <h1>Nossos cafés</h1>
-
-        <CoffeeList />
+        <CoffeeList isListOnCart={false} />
       </CoffeeListContainer>
       </>
   )

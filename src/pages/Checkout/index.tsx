@@ -1,35 +1,27 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
-import { coffees } from "../../coffees"
 
-import { Counter } from "../../components/Counter"
 import { AddressForm } from "./components/AddressForm"
 import { PaymentForm } from "./components/PaymentForm"
 
 import { 
   CurrencyDollar,  
   MapPinLine, 
-  Trash
 } from "@phosphor-icons/react"
 
 import { 
   Fieldset, 
   AddressFormTitle, 
   AddressPaymentWrapper, 
-  CheckoutContainer, 
-  SelectedCoffeeList, 
-  SelectedCoffee, 
+  CheckoutContainer,  
   ConfirmOrderWrapper,  
   PaymentFormTitle,
-  Remove,
-  Separator,
-  Buttons,
-  Info,
   FinishDetails,
   Total,
   ConfirmButton,  
 } from "./styles"
+import { CoffeeList } from '../../components/CoffeeList'
 
 export function Checkout () {
   const checkoutFormValidationSchema = zod.object({
@@ -105,55 +97,7 @@ export function Checkout () {
       <section>
         <h1>Cafés selecionados</h1>
         <ConfirmOrderWrapper>
-
-        <SelectedCoffeeList>
-            <img src={coffees[0].image} alt="" />
-            <SelectedCoffee>
-              <Info>
-                <span>
-                  {coffees[0].name}
-                </span>
-                <p>
-                  {`R$ ${coffees[0].price}`}
-                </p>
-              </Info>
-
-              <Buttons>
-                <Counter />
-                <Remove type="button">
-                  <Trash size={16} />
-                  REMOVER
-                </Remove>
-              </Buttons>
-            </SelectedCoffee>
-          </SelectedCoffeeList>
-
-          <Separator />
-
-          <SelectedCoffeeList>
-            <img src={coffees[4].image} alt="" />
-            <SelectedCoffee>
-              <Info>
-                <span>
-                  {coffees[4].name}
-                </span>
-                <p>
-                  {`R$ ${coffees[4].price}`}
-                </p>
-              </Info>
-
-              <Buttons>
-                <Counter />
-                <Remove type="button">
-                  <Trash size={16} />
-                  REMOVER
-                </Remove>
-              </Buttons>
-            </SelectedCoffee>
-          </SelectedCoffeeList>
-
-          <Separator />
-
+          <CoffeeList isListOnCart={true} />
           <FinishDetails>
             <div>
               <p>Total de itens</p>

@@ -1,31 +1,34 @@
-import { Minus, Plus } from '@phosphor-icons/react'
-import { Button, HStack, Input, useNumberInput } from '@chakra-ui/react'
+import { useContext, useState } from "react";
+import { CoffeeType } from "../../coffees";
 
-import { CounterContainer } from './styles'
+import { Minus, Plus } from "@phosphor-icons/react";
+import { CartContext } from "../../contexts/CartContext";
 
-export function Counter() {
-  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
-    useNumberInput({
-      step: 1,
-      defaultValue: 0,
-      min: 0,
-    })
+import { CounterContainer } from "./styles";
 
-  const increment = getIncrementButtonProps()
-  const decrement = getDecrementButtonProps()
-  const input = getInputProps() 
+interface CounterProps {
+  coffee: CoffeeType;
+  counterInCartList: boolean;
+}
+
+export function Counter({ coffee, counterInCartList }: CounterProps) {
+  const { addItemToCart} = useContext(CartContext)
+  const [quantity, setQuantity] = useState(0)
+
+  function handleAddItemToCart(coffee: CoffeeType) {
+    addItemToCart(coffee)
+    setQuantity(state => state + 1)
+  }
 
   return (
     <CounterContainer>
-      <HStack>
-        <Button {...decrement}>
-          <Minus size={14} />  
-        </Button>
-        <Input {...input} width={20} />
-        <Button {...increment}>
-          <Plus size={14} />
-        </Button>
-      </HStack>
+      <button type='button' onClick={() => 'EBAAAA'}>
+        <Minus size={14} />
+      </button>  
+      {counterInCartList ? <span>{coffee.quantity}</span> : <span>{quantity}</span>}
+      <button type="button" onClick={() => handleAddItemToCart(coffee)}> 
+        <Plus size={14} />
+      </button>
     </ CounterContainer>
   )
 }
