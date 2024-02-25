@@ -12,7 +12,7 @@ interface CounterProps {
 }
 
 export function Counter({ coffee, counterInCartList }: CounterProps) {
-  const { addItemToCart} = useContext(CartContext)
+  const { addItemToCart, subtractItemFromCart } = useContext(CartContext)
   const [quantity, setQuantity] = useState(0)
 
   function handleAddItemToCart(coffee: CoffeeType) {
@@ -20,9 +20,14 @@ export function Counter({ coffee, counterInCartList }: CounterProps) {
     setQuantity(state => state + 1)
   }
 
+  function handleSubtractItemFromCart(coffee: CoffeeType) {
+    subtractItemFromCart(coffee)
+    setQuantity(state => state - 1)
+  }
+
   return (
     <CounterContainer>
-      <button type='button' onClick={() => 'EBAAAA'}>
+      <button type='button' onClick={() => handleSubtractItemFromCart(coffee)}>
         <Minus size={14} />
       </button>  
       {counterInCartList ? <span>{coffee.quantity}</span> : <span>{quantity}</span>}

@@ -5,7 +5,7 @@ import { Trash } from '@phosphor-icons/react'
 import { ShoppingCart } from '@phosphor-icons/react'
 
 import { Counter } from '../Counter'
-import { coffees } from '../../coffees'
+import { CoffeeType, coffees } from '../../coffees'
 import { CartContext } from '../../contexts/CartContext'
 
 import { 
@@ -28,7 +28,11 @@ interface CoffeeListProps {
 }
 
 export function CoffeeList({ isListOnCart }: CoffeeListProps) {
-  const { cart } = useContext(CartContext)
+  const { cart, removeItemFromCart } = useContext(CartContext)
+
+  function handleRemoveItemFromCart(item: CoffeeType) {
+    removeItemFromCart(item)
+  }
 
   return (
     <div>
@@ -51,7 +55,7 @@ export function CoffeeList({ isListOnCart }: CoffeeListProps) {
 
                     <Buttons>
                       <Counter coffee={item} counterInCartList={true} />
-                      <Remove type="button">
+                      <Remove type="button" onClick={() => handleRemoveItemFromCart(item)}>
                         <Trash size={16} />
                         REMOVER
                       </Remove>

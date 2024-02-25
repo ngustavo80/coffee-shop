@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { MapPin, ShoppingCart, XCircle } from '@phosphor-icons/react'
 
 import coffeeDeliveryLogo from '../../assets/coffeeLogo.svg'
-import { HeaderContainer, LocationCardDenied, LocationCardGranted } from './styles'
+import { HeaderContainer, ItemsInCart, LocationCardDenied, LocationCardGranted } from './styles'
+import { CartContext } from '../../contexts/CartContext'
 
 interface LocationProps {
     stateCode: string | undefined;
@@ -18,6 +19,8 @@ interface PositionProps {
 }
 
 export function Header() {
+  const { cart } = useContext(CartContext)
+
   const [location, setLocation] = useState<LocationProps>(() => {
     const locationOnStorage = localStorage.getItem('@coffee-delivery:location-1.0.0')
 
@@ -94,11 +97,12 @@ export function Header() {
                 <span>{location.city}, {location.stateCode}</span>
               </LocationCardGranted>
           }
-        <NavLink to='/checkout'>
-          <div className='cart'>
-            <ShoppingCart size={22} weight='fill' />
-          </div>
-        </NavLink>
+          <NavLink to='/checkout'>
+            <div className='cart'>
+              {cart.length === 0 ? <></> : <ItemsInCart>{cart.length}</ItemsInCart>}
+              <ShoppingCart size={22} weight='fill' />
+            </div>
+          </NavLink>
       </nav>
     </HeaderContainer>
   )
