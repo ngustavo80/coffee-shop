@@ -1,7 +1,7 @@
-import { createContext, useEffect, useReducer } from "react"
+import { createContext, useReducer, useState } from "react"
 
 import { CoffeeType } from "../coffees"
-import { produce } from "immer";
+import { CartReducer } from "../reducers/cart/reducer";
 
 interface CartContextProviderProps {
   children: React.ReactNode
@@ -9,53 +9,30 @@ interface CartContextProviderProps {
 
 interface CartContextType {
   cart: CoffeeType[];
+  address: AddressType;
   addItemToCart: (item: CoffeeType) => void;
-  removeItemFromCart: (item: CoffeeType) => void;
-  subtractItemFromCart: (item: CoffeeType) => void;
+  removeItemFromCart: (coffeeId: string) => void;
+  subtractItemFromCart: (coffeeId: string) => void;
+  RegisterAddress: (data: AddressType) => void;
+}
+
+interface AddressType {
+  city: string;
+  complement?: string;
+  neighborhood: string;
+  number: string;
+  paymentMethod: string;
+  state: string;  
+  street: string;
+  zipCode: string;
 }
 
 export const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider({children}: CartContextProviderProps) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [cart, dispatch] = useReducer((state: CoffeeType[], action: any) => {
-    const itemAlreadyInCoffee = state.findIndex(item => item.id === action.payload.item.id)
-    switch(action.type) {
-      case 'ADD_ITEM_TO_CART': {
-        if(itemAlreadyInCoffee !== -1) {
-          return produce(state, (draft) =>{
-            draft[itemAlreadyInCoffee].quantity++
-          })
-        } else {
-          return produce(state, (draft)=> {
-            draft.push(action.payload.item)
-          })
-        }
-      }
+  const [address, setAddress] = useState({} as AddressType)
 
-      case 'SUBTRACT_ITEM_FROM_CART': {
-        return produce(state, (draft) => {
-          if(draft[itemAlreadyInCoffee].quantity === 1) {
-            draft.splice(itemAlreadyInCoffee, 1)
-          } else {
-            draft[itemAlreadyInCoffee].quantity--
-          }
-        })
-      }
-
-      case 'REMOVE_ITEM_FROM_CART': {
-        return produce(state, (draft) => {
-          draft.splice(itemAlreadyInCoffee, 1)
-        })
-      }
-
-      default: {
-        return state
-      }
-    }
-  }, [], (initialState) => { return initialState })
-
-  useEffect(() => {console.log(cart)}, [cart])
+  const [cart, dispatch] = useReducer(CartReducer, [], (initialState) => { return initialState })
 
   function addItemToCart(item: CoffeeType) {
     dispatch({
@@ -64,18 +41,17 @@ export function CartContextProvider({children}: CartContextProviderProps) {
     })
   }
 
-  function removeItemFromCart(item: CoffeeType) {
-    dispatch({
-      type: 'REMOVE_ITEM_FROM_CART',
-      payload: { item }
-    })
+  function removeItemFromCart(coffeeId: string) {
+    dispatch({ type: 'REMOVE_ITEM_FROM_CART', payload: { coffeeId } })
   }
 
-  function subtractItemFromCart(item: CoffeeType) {
-    dispatch({
-      type: 'SUBTRACT_ITEM_FROM_CART',
-      payload: { item }
-    })
+  function subtractItemFromCart(coffeeId: string) {
+    dispatch({ type: 'SUBTRACT_ITEM_FROM_CART', payload: { coffeeId } })
+  }
+
+  function RegisterAddress(data: AddressType) {
+    setAddress(data)
+    dispatch({ type: 'REMOVE_ALL_ITEMS_FROM_CART' })
   }
 
   return (
@@ -83,7 +59,9 @@ export function CartContextProvider({children}: CartContextProviderProps) {
       cart,
       addItemToCart,
       removeItemFromCart,
-      subtractItemFromCart
+      subtractItemFromCart,
+      RegisterAddress,
+      address
     }}>
       {children}
     </CartContext.Provider>

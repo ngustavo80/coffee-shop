@@ -1,13 +1,17 @@
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
 
+import { CartContext } from '../../contexts/CartContext'
 import { AddressForm } from "./components/AddressForm"
 import { PaymentForm } from "./components/PaymentForm"
 
 import { 
   CurrencyDollar,  
-  MapPinLine, 
+  MapPinLine,
+  SmileySad, 
 } from "@phosphor-icons/react"
 
 import { 
@@ -19,11 +23,14 @@ import {
   PaymentFormTitle,
   FinishDetails,
   Total,
-  ConfirmButton,  
+  ConfirmButton,
+  EmptyCart,  
 } from "./styles"
 import { CoffeeList } from '../../components/CoffeeList'
 
 export function Checkout () {
+  const { cart, RegisterAddress } = useContext(CartContext)
+
   const checkoutFormValidationSchema = zod.object({
     zipCode: zod.string()
       .min(8, 'Por favor, informe o CEP corretamente')
@@ -54,71 +61,82 @@ export function Checkout () {
   })
 
   const { handleSubmit } = checkoutForm
+  const history = useNavigate()
 
   function handleCheckoutFormSubmit(data: addressFormData) {
-    console.log(data)
+    RegisterAddress(data)
+    history('/success')
   }
 
   return (
-    <CheckoutContainer>
-      <form id="checkoutForm" onSubmit={handleSubmit(handleCheckoutFormSubmit)}>
-      <FormProvider {...checkoutForm} >
-        <section>
-          <h1>Complete seu pedido</h1>
-          <AddressPaymentWrapper>
-            <Fieldset>
-              <AddressFormTitle>
-                  <MapPinLine size={22} />
+    <div>
+      {cart.length === 0 ? 
+        <EmptyCart>
+          <SmileySad size={100} />
+          <span>Seu carrinho está vazio</span>
+        </EmptyCart>
+        :
+        <CheckoutContainer>
+          <form id="checkoutForm" onSubmit={handleSubmit(handleCheckoutFormSubmit)}>
+          <FormProvider {...checkoutForm} >
+            <section>
+              <h1>Complete seu pedido</h1>
+              <AddressPaymentWrapper>
+                <Fieldset>
+                  <AddressFormTitle>
+                      <MapPinLine size={22} />
+                    <div>
+                      <strong>Endereço de entrega</strong>
+                      <span>Informe o endereço em que deseja receber seu pedido</span>
+                    </div>
+                  </AddressFormTitle>
+
+                  <AddressForm />
+
+                </Fieldset>
+
+                <Fieldset>
+                  <PaymentFormTitle>
+                      <CurrencyDollar size={22} />
+                    <div>
+                      <strong>Pagamento</strong>
+                      <span>O pagamento é feito na entrega.Escolha a forma que deseja pagar.</span>
+                    </ div>
+                  </PaymentFormTitle>
+                    <PaymentForm />
+                </Fieldset>
+              </AddressPaymentWrapper>
+            </section>
+          </FormProvider>
+          </form>
+
+          <section>
+            <h1>Cafés selecionados</h1>
+            <ConfirmOrderWrapper>
+              <CoffeeList isListOnCart={true} />
+              <FinishDetails>
                 <div>
-                  <strong>Endereço de entrega</strong>
-                  <span>Informe o endereço em que deseja receber seu pedido</span>
+                  <p>Total de itens</p>
+                  <p>R$ 19,00</p>
                 </div>
-              </AddressFormTitle>
-
-              <AddressForm />
-
-            </Fieldset>
-
-            <Fieldset>
-              <PaymentFormTitle>
-                  <CurrencyDollar size={22} />
                 <div>
-                  <strong>Pagamento</strong>
-                  <span>O pagamento é feito na entrega.Escolha a forma que deseja pagar.</span>
-                </ div>
-              </PaymentFormTitle>
-                <PaymentForm />
-            </Fieldset>
-          </AddressPaymentWrapper>
-        </section>
-      </FormProvider>
-      </form>
+                  <p>Entrega (taxa fixa)</p>
+                  <p>R$ 5,00</p>
+                </div>
 
-      <section>
-        <h1>Cafés selecionados</h1>
-        <ConfirmOrderWrapper>
-          <CoffeeList isListOnCart={true} />
-          <FinishDetails>
-            <div>
-              <p>Total de itens</p>
-              <p>R$ 19,00</p>
-            </div>
-            <div>
-              <p>Entrega (taxa fixa)</p>
-              <p>R$ 5,00</p>
-            </div>
+                <Total>
+                  <strong>Total</strong>
+                  <strong>R$ 24,00</strong>
+                </Total>
 
-            <Total>
-              <strong>Total</strong>
-              <strong>R$ 24,00</strong>
-            </Total>
-
-            <ConfirmButton type="submit" form="checkoutForm">
-              CONFIRMAR PEDIDO
-            </ConfirmButton>
-          </FinishDetails>
-        </ConfirmOrderWrapper>
-      </section>
-    </CheckoutContainer>
+                <ConfirmButton type="submit" form="checkoutForm">
+                  CONFIRMAR PEDIDO
+                </ConfirmButton>
+              </FinishDetails>
+            </ConfirmOrderWrapper>
+          </section>
+        </CheckoutContainer>
+      }
+    </div>
   )
 }

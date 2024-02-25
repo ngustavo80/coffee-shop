@@ -20,14 +20,14 @@ export function Counter({ coffee, counterInCartList }: CounterProps) {
     setQuantity(state => state + 1)
   }
 
-  function handleSubtractItemFromCart(coffee: CoffeeType) {
-    subtractItemFromCart(coffee)
+  function handleSubtractItemFromCart(coffeeId: string) {
+    subtractItemFromCart(coffeeId)
     setQuantity(state => state - 1)
   }
 
   return (
     <CounterContainer>
-      <button type='button' onClick={() => handleSubtractItemFromCart(coffee)}>
+      <button type='button' onClick={() => handleSubtractItemFromCart(coffee.id)}>
         <Minus size={14} />
       </button>  
       {counterInCartList ? <span>{coffee.quantity}</span> : <span>{quantity}</span>}

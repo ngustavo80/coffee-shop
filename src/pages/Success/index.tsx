@@ -1,5 +1,9 @@
+import { useContext } from 'react';
 import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react';
+
 import illustration from '../../assets/Illustration.svg'
+import { CartContext } from '../../contexts/CartContext';
+
 import { 
   AddressDetailsLogo, 
   DeliveryDetails, 
@@ -12,6 +16,8 @@ import {
 
 
 export function Success() {
+  const { address } = useContext(CartContext)
+
   return (
     <SuccessPageContainer>
       <strong>Uhu! Pedido confirmado</strong>
@@ -24,8 +30,8 @@ export function Success() {
               <MapPin size={16} weight='fill' />
             </AddressDetailsLogo>
             <DetailsDescription>
-              <p>Entregar em <strong>Alameda Monte Belo, 57</strong><br/>
-              Largo da Batalha, Niterói - RJ</p>
+              <p>Entregar em <strong>{address.street}, {address.number}</strong><br/>
+              {address.neighborhood}, {address.city} - {address.state}</p>
             </DetailsDescription>
           </div>
 
@@ -45,7 +51,15 @@ export function Success() {
             </PaymentDetailsLogo>
             <DetailsDescription>
               <p>Pagamento na entrega <br/>
-              <strong>Cartão de crédito</strong></p>
+              {address.paymentMethod === 'creditCard' ? 
+                <strong>Cartão de crédito</strong> : 
+              address.paymentMethod === 'debitCard' ? 
+                <strong>Cartão de débito</strong> : 
+              address.paymentMethod === 'currency' ? 
+                <strong>Dinheiro</strong> : 
+                <strong>Forma de pagamento não informada</strong>
+              }
+              </p>
             </DetailsDescription>
           </div>
         </DeliveryDetails>

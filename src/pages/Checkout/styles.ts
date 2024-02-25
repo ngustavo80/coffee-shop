@@ -183,3 +183,19 @@ export const ConfirmButton = styled.button`
     opacity: 0.9;
   }
 `
+
+export const EmptyCart = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 10rem;
+  gap: 1rem;
+
+  color: ${props => props.theme['gray-800']};
+
+  span {
+    font-size: 2rem;
+  }
+`
