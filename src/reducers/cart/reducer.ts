@@ -1,11 +1,13 @@
 import { produce } from "immer"
+
+import { ActionTypes } from "./actions"
 import { CoffeeType } from "../../coffees"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function CartReducer(state: CoffeeType[], action: any) {
   switch(action.type) {
     
-    case 'ADD_ITEM_TO_CART': {
+    case ActionTypes.ADD_ITEM_TO_CART: {
       const itemAlreadyInCartIndex = state.findIndex(item => item.id === action.payload.item.id)
       if(itemAlreadyInCartIndex !== -1) {
         return produce(state, (draft) =>{
@@ -18,7 +20,7 @@ export function CartReducer(state: CoffeeType[], action: any) {
       }
     }
 
-    case 'SUBTRACT_ITEM_FROM_CART': {
+    case ActionTypes.SUBTRACT_ITEM_FROM_CART: {
       const itemInCartIndex = state.findIndex(item => item.id === action.payload.coffeeId)
 
       return produce(state, (draft) => {
@@ -30,14 +32,14 @@ export function CartReducer(state: CoffeeType[], action: any) {
       })
     }
 
-    case 'REMOVE_ITEM_FROM_CART': {
+    case ActionTypes.REMOVE_ITEM_FROM_CART: {
       const itemInCartIndex = state.findIndex(item => item.id === action.payload.coffeeId)
       return produce(state, (draft) => {
         draft.splice(itemInCartIndex, 1)
       })
     }
 
-    case 'REMOVE_ALL_ITEMS_FROM_CART': {
+    case ActionTypes.REMOVE_ALL_ITEMS_FROM_CART: {
       return produce(state, (draft) => {
         draft.splice(0, draft.length)
       })

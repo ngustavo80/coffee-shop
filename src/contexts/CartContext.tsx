@@ -2,6 +2,12 @@ import { createContext, useReducer, useState } from "react"
 
 import { CoffeeType } from "../coffees"
 import { CartReducer } from "../reducers/cart/reducer";
+import { 
+  addItemToCartAction, 
+  removeAllItemFromCartAction, 
+  removeItemFromCartAction, 
+  subtractItemFromCartAction 
+} from "../reducers/cart/actions";
 
 interface CartContextProviderProps {
   children: React.ReactNode
@@ -35,23 +41,20 @@ export function CartContextProvider({children}: CartContextProviderProps) {
   const [cart, dispatch] = useReducer(CartReducer, [], (initialState) => { return initialState })
 
   function addItemToCart(item: CoffeeType) {
-    dispatch({
-      type: 'ADD_ITEM_TO_CART',
-      payload: { item }
-    })
+    dispatch(addItemToCartAction(item))
   }
 
   function removeItemFromCart(coffeeId: string) {
-    dispatch({ type: 'REMOVE_ITEM_FROM_CART', payload: { coffeeId } })
+    dispatch(removeItemFromCartAction(coffeeId))
   }
 
   function subtractItemFromCart(coffeeId: string) {
-    dispatch({ type: 'SUBTRACT_ITEM_FROM_CART', payload: { coffeeId } })
+    dispatch(subtractItemFromCartAction(coffeeId))
   }
 
   function RegisterAddress(data: AddressType) {
     setAddress(data)
-    dispatch({ type: 'REMOVE_ALL_ITEMS_FROM_CART' })
+    dispatch(removeAllItemFromCartAction())
   }
 
   return (
