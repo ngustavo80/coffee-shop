@@ -49,7 +49,7 @@ export function CoffeeList({ isListOnCart }: CoffeeListProps) {
                         {item.name}
                       </span>
                       <p>
-                        {`R$ ${item.price}`}
+                        {`R$ ${item.price},00`}
                       </p>
                     </Info>
 
@@ -89,7 +89,7 @@ export function CoffeeList({ isListOnCart }: CoffeeListProps) {
                     <Price>
                       <p>R$</p>
                       <span>
-                        {coffee.price}
+                        {`${coffee.price},00`}
                       </span>
                     </Price>
 

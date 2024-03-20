@@ -11,18 +11,19 @@ interface CounterProps {
   counterInCartList: boolean;
 }
 
-export function Counter({ coffee, counterInCartList }: CounterProps) {
+export function Counter({ coffee }: CounterProps) {
   const { addItemToCart, subtractItemFromCart } = useContext(CartContext)
-  const [quantity, setQuantity] = useState(0)
+
+  const [quantity, setQuantity] = useState(coffee.quantity)
 
   function handleAddItemToCart(coffee: CoffeeType) {
-    addItemToCart(coffee)
     setQuantity(state => state + 1)
+    addItemToCart(coffee)
   }
 
   function handleSubtractItemFromCart(coffeeId: string) {
-    subtractItemFromCart(coffeeId)
     setQuantity(state => state - 1)
+    subtractItemFromCart(coffeeId)
   }
 
   return (
@@ -30,7 +31,8 @@ export function Counter({ coffee, counterInCartList }: CounterProps) {
       <button type='button' onClick={() => handleSubtractItemFromCart(coffee.id)}>
         <Minus size={14} />
       </button>  
-      {counterInCartList ? <span>{coffee.quantity}</span> : <span>{quantity}</span>}
+      {/* {counterInCartList ? <span>{coffee.quantity}</span> : <span>{quantity}</span>} */}
+      <span>{quantity}</span>
       <button type="button" onClick={() => handleAddItemToCart(coffee)}> 
         <Plus size={14} />
       </button>

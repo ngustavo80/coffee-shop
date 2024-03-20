@@ -29,7 +29,7 @@ import {
 import { CoffeeList } from '../../components/CoffeeList'
 
 export function Checkout () {
-  const { cart, RegisterAddress } = useContext(CartContext)
+  const { cart, RegisterAddress, subTotal, total } = useContext(CartContext)
 
   const checkoutFormValidationSchema = zod.object({
     zipCode: zod.string()
@@ -117,7 +117,7 @@ export function Checkout () {
               <FinishDetails>
                 <div>
                   <p>Total de itens</p>
-                  <p>R$ 19,00</p>
+                  <p>{`R$${subTotal},00`}</p>
                 </div>
                 <div>
                   <p>Entrega (taxa fixa)</p>
@@ -126,7 +126,7 @@ export function Checkout () {
 
                 <Total>
                   <strong>Total</strong>
-                  <strong>R$ 24,00</strong>
+                  <strong>{`R$${total},00`}</strong>
                 </Total>
 
                 <ConfirmButton type="submit" form="checkoutForm">
