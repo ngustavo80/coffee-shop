@@ -18,12 +18,10 @@ interface CartContextType {
   address: AddressType;
   subTotal: number;
   total: number;
-  // quantity: number;
   addItemToCart: (item: CoffeeType) => void;
   removeItemFromCart: (coffeeId: string) => void;
   subtractItemFromCart: (coffeeId: string) => void;
   RegisterAddress: (data: AddressType) => void;
-  // setQuantity: (number: number | ((state: number) => number)) => void
 }
 
 interface AddressType {

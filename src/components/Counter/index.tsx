@@ -31,7 +31,6 @@ export function Counter({ coffee }: CounterProps) {
       <button type='button' onClick={() => handleSubtractItemFromCart(coffee.id)}>
         <Minus size={14} />
       </button>  
-      {/* {counterInCartList ? <span>{coffee.quantity}</span> : <span>{quantity}</span>} */}
       <span>{quantity}</span>
       <button type="button" onClick={() => handleAddItemToCart(coffee)}> 
         <Plus size={14} />
