@@ -7,7 +7,12 @@ export enum ActionTypes {
   REMOVE_ALL_ITEMS_FROM_CART = 'REMOVE_ALL_ITEMS_FROM_CART',
 }
 
-export function addItemToCartAction(item: CoffeeType) {
+export interface ItemProps {
+  coffee: CoffeeType;
+  quantity: number;
+}
+
+export function addItemToCartAction(item: ItemProps) {
   return {
     type: ActionTypes.ADD_ITEM_TO_CART,
     payload: { item }

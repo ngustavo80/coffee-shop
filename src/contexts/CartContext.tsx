@@ -14,11 +14,11 @@ interface CartContextProviderProps {
 }
 
 interface CartContextType {
-  cart: CoffeeType[];
+  cart: ItemProps[];
   address: AddressType;
   subTotal: number;
   total: number;
-  addItemToCart: (item: CoffeeType) => void;
+  addItemToCart: (item: ItemProps) => void;
   removeItemFromCart: (coffeeId: string) => void;
   subtractItemFromCart: (coffeeId: string) => void;
   RegisterAddress: (data: AddressType) => void;
@@ -35,6 +35,11 @@ interface AddressType {
   zipCode: string;
 }
 
+interface ItemProps {
+  coffee: CoffeeType;
+  quantity: number;
+}
+
 export const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider({children}: CartContextProviderProps) {
@@ -43,7 +48,7 @@ export function CartContextProvider({children}: CartContextProviderProps) {
   const [total, setTotal] = useState(0)
   const [cart, dispatch] = useReducer(CartReducer, [], (initialState) => { return initialState })
 
-  function addItemToCart(item: CoffeeType) {
+  function addItemToCart(item: ItemProps) {
     dispatch(addItemToCartAction(item))
   }
 
@@ -63,14 +68,16 @@ export function CartContextProvider({children}: CartContextProviderProps) {
   useEffect(() => {
     const subTotalPrice = cart.reduce((total, item) => {
       if(item.quantity > 0) {
-        return total + (item.quantity * item.price)
+        return total + (item.quantity * item.coffee.price)
       }
 
-      return total + item.price
+      return total + item.coffee.price
     }, 0)
 
     setSubTotal(subTotalPrice)
     setTotal(subTotal + 5)
+
+    console.log(cart)
   }, [cart, subTotal])
 
   return (

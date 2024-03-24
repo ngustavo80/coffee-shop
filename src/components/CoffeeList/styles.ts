@@ -1,15 +1,6 @@
 import styled from "styled-components";
 
 //-------------------COFFEE ON HOMEW --------------------------------
-export const CoffeeWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 2rem;
-  row-gap: 2.5rem;
-
-  margin-bottom: 9rem;
-`
-
 export const CoffeeCard = styled.div`
   max-width: 16rem;
   display: flex;
@@ -101,9 +92,10 @@ export const Buy = styled.div`
   display: flex;
   gap: 0.5rem;
 
-  a {
+  button {
     display: flex;
     align-items: center;
+    border: none;
 
     padding: 0.5rem;
     border-radius: 8px;

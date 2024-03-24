@@ -1,6 +1,7 @@
 import { Coffee, Package, ShoppingCart, Timer } from "@phosphor-icons/react"
 
 import { CoffeeList } from '../../components/CoffeeList'
+import { coffees } from '../../coffees'
 
 import coffeeDeliveryImage from "../../assets/coffeeDelivery.svg"
 import { 
@@ -15,6 +16,7 @@ import {
   CoffeeLogo,
   ItemsWrapper,
   CoffeeListContainer,
+  CoffeeListTitle,
   } from "./styles"
 
 export function Home() {
@@ -61,9 +63,11 @@ export function Home() {
         <CoffeeDeliveryMainImage src={coffeeDeliveryImage} alt="" />
       </MainContainer>
 
+      <CoffeeListTitle>Nossos cafés</CoffeeListTitle>
       <CoffeeListContainer>
-        <h1>Nossos cafés</h1>
-        <CoffeeList isListOnCart={false} />
+        {coffees.map(coffee => {
+          return <CoffeeList key={coffee.id} coffee={coffee} isListOnCart={false}  />
+        })}
       </CoffeeListContainer>
       </>
   )

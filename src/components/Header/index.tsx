@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { MapPin, ShoppingCart, XCircle } from '@phosphor-icons/react'
 
 import coffeeDeliveryLogo from '../../assets/coffeeLogo.svg'
@@ -80,9 +80,9 @@ export function Header() {
 
   return (
     <HeaderContainer>
-      <NavLink to='/'>
+      <Link to='/'>
         <img src={coffeeDeliveryLogo} alt="" />
-      </NavLink>
+      </Link>
 
       <nav>
           {
@@ -97,12 +97,12 @@ export function Header() {
                 <span>{location.city}, {location.stateCode}</span>
               </LocationCardGranted>
           }
-          <NavLink to='/checkout'>
+          <Link to={`checkout`} aria-disabled={cart.length === 0}>
             <div className='cart'>
-              {cart.length === 0 ? <></> : <ItemsInCart>{cart.length}</ItemsInCart>}
+              {cart.length === 0 ? null : <ItemsInCart>{cart.length}</ItemsInCart>}
               <ShoppingCart size={22} weight='fill' />
             </div>
-          </NavLink>
+          </Link>
       </nav>
     </HeaderContainer>
   )

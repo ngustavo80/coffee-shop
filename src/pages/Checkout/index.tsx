@@ -113,7 +113,9 @@ export function Checkout () {
           <section>
             <h1>Cafés selecionados</h1>
             <ConfirmOrderWrapper>
-              <CoffeeList isListOnCart={true} />
+              {cart.map(item => {
+                return <CoffeeList key={item.coffee.id} isListOnCart={true} coffee={item.coffee} />
+              })}
               <FinishDetails>
                 <div>
                   <p>Total de itens</p>

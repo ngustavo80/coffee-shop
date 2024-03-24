@@ -1,39 +1,39 @@
 import { produce } from "immer"
 
-import { ActionTypes } from "./actions"
-import { CoffeeType } from "../../coffees"
+import { ActionTypes, ItemProps } from "./actions"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function CartReducer(state: CoffeeType[], action: any) {
+export function CartReducer(state: ItemProps[], action: any) {
   switch(action.type) {
-    
     case ActionTypes.ADD_ITEM_TO_CART: {
-      const itemAlreadyInCartIndex = state.findIndex(item => item.id === action.payload.item.id)
-      if(itemAlreadyInCartIndex !== -1) {
-        return produce(state, (draft) =>{
-          draft[itemAlreadyInCartIndex].quantity++
-        })
-      } else {
-        return [...state, {...action.payload.item, quantity: 1}]
-      }
+      return produce(state, (draft) => {
+        const itemAlreadyInCartIndex = draft.find((item) => item.coffee.id === action.payload.item.coffee.id)
+
+        if(itemAlreadyInCartIndex) {
+          itemAlreadyInCartIndex.quantity=+ action.payload.item.quantity
+        } else {
+          draft.push(action.payload.item)
+        }
+      })
     }
 
     case ActionTypes.SUBTRACT_ITEM_FROM_CART: {
-      const itemInCartIndex = state.findIndex(item => item.id === action.payload.coffeeId)
       return produce(state, (draft) => {
-        if(draft[itemInCartIndex].quantity === 1) {
-          draft.splice(itemInCartIndex, 1)
-        } else {
-          draft[itemInCartIndex].quantity--
+        const itemInCartIndex = draft.findIndex(item => item.coffee.id === action.payload.coffeeId)
+        if(draft[itemInCartIndex].quantity >= 1) {
+          draft[itemInCartIndex].quantity=- action.payload.item.quantity
         }
       })
     }
 
     case ActionTypes.REMOVE_ITEM_FROM_CART: {
-      const itemInCartIndex = state.findIndex(item => item.id === action.payload.coffeeId)
       return produce(state, (draft) => {
-        draft[itemInCartIndex].quantity = 0
-        draft.splice(itemInCartIndex, 1)
+        const itemInCartIndex = draft.findIndex(item => item.coffee.id === action.payload.item.coffee.id)
+        
+        if(itemInCartIndex > -1) {
+          draft[itemInCartIndex].quantity = 0
+          draft.splice(itemInCartIndex, 1)
+        }
       })
     }
 
@@ -48,3 +48,15 @@ export function CartReducer(state: CoffeeType[], action: any) {
     }
   }
 }
+
+
+
+// if(itemAlreadyInCartIndex) {
+      //   return produce(state, (draft) =>{
+      //     itemAlreadyInCartIndex.quantity=+ action.payload.item.quantity
+      //   })
+      // } else {
+      //   return produce(state, (draft) => {
+      //     draft.push(action.payload.item)
+      //   })
+      // }

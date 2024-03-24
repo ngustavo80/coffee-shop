@@ -12,11 +12,12 @@ export const CounterContainer = styled.div`
   button {
     display: flex;
     align-items: center;
+    padding: 0 !important;
 
-    background: transparent;
+    background: transparent !important;
     border: none;
     cursor: pointer;
-    color: ${props => props.theme['purple-800']};
+    color: ${props => props.theme['purple-800']} !important;
   }
 
   span {
