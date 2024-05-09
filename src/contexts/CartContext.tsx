@@ -6,7 +6,8 @@ import {
   addItemToCartAction, 
   removeAllItemFromCartAction, 
   removeItemFromCartAction, 
-  subtractItemFromCartAction 
+  decrementItemQuantityFromCart,
+  incrementItemQuantityFromCart
 } from "../reducers/cart/actions";
 
 interface CartContextProviderProps {
@@ -20,7 +21,8 @@ interface CartContextType {
   total: number;
   addItemToCart: (item: ItemProps) => void;
   removeItemFromCart: (coffeeId: string) => void;
-  subtractItemFromCart: (coffeeId: string) => void;
+  decrementItemFromCart: (coffeeId: string) => void;
+  incrementItemFromCart: (coffeeId: string) => void;
   RegisterAddress: (data: AddressType) => void;
 }
 
@@ -52,12 +54,16 @@ export function CartContextProvider({children}: CartContextProviderProps) {
     dispatch(addItemToCartAction(item))
   }
 
-  function removeItemFromCart(coffeeId: string) {
-    dispatch(removeItemFromCartAction(coffeeId))
+  function decrementItemFromCart(coffeeId: string) {
+    dispatch(decrementItemQuantityFromCart(coffeeId))
   }
 
-  function subtractItemFromCart(coffeeId: string) {
-    dispatch(subtractItemFromCartAction(coffeeId))
+  function incrementItemFromCart(coffeeId: string) {
+    dispatch(incrementItemQuantityFromCart(coffeeId))
+  }
+
+  function removeItemFromCart(coffeeId: string) {
+    dispatch(removeItemFromCartAction(coffeeId))
   }
 
   function RegisterAddress(data: AddressType) {
@@ -76,8 +82,6 @@ export function CartContextProvider({children}: CartContextProviderProps) {
 
     setSubTotal(subTotalPrice)
     setTotal(subTotal + 5)
-
-    console.log(cart)
   }, [cart, subTotal])
 
   return (
@@ -85,7 +89,8 @@ export function CartContextProvider({children}: CartContextProviderProps) {
       cart,
       addItemToCart,
       removeItemFromCart,
-      subtractItemFromCart,
+      decrementItemFromCart,
+      incrementItemFromCart,
       RegisterAddress,
       address,
       subTotal,

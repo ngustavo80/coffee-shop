@@ -1,9 +1,8 @@
 import { Minus, Plus } from "@phosphor-icons/react";
-import { CounterContainer } from "./styles";
+import { ChangeQuantityButton, CounterContainer } from "./styles";
 
 interface CounterProps {
-  counterInCartList: boolean;
-  quantity: number;
+  quantity?: number;
   handleIncrementItem: () => void;
   handleDecrementItem: () => void;
 }
@@ -11,17 +10,17 @@ interface CounterProps {
 export function Counter({ 
   handleIncrementItem, 
   handleDecrementItem, 
-  quantity }: CounterProps) {
-    
+  quantity,
+ }: CounterProps) {
   return (
     <CounterContainer>
-      <button type='button' onClick={handleDecrementItem}>
+      <ChangeQuantityButton type='button' onClick={handleDecrementItem}>
         <Minus size={14} />
-      </button>
-      <span>{quantity}</span> 
-      <button type="button" onClick={handleIncrementItem}> 
+      </ChangeQuantityButton>
+      <span>{quantity}</span>
+      <ChangeQuantityButton type="button" onClick={handleIncrementItem}> 
         <Plus size={14} />
-      </button>
+      </ChangeQuantityButton>
     </ CounterContainer>
   )
 }

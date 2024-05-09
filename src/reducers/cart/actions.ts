@@ -5,6 +5,8 @@ export enum ActionTypes {
   REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART',
   SUBTRACT_ITEM_FROM_CART = 'SUBTRACT_ITEM_FROM_CART',
   REMOVE_ALL_ITEMS_FROM_CART = 'REMOVE_ALL_ITEMS_FROM_CART',
+  DECREMENT_ITEM_QUANTITY_FROM_CART = 'DECREMENT_ITEM_QUANTITY_FROM_CART',
+  INCREMENT_ITEM_QUANTITY_FROM_CART = 'INCREMENT_ITEM_QUANTITY_FROM_CART',
 }
 
 export interface ItemProps {
@@ -32,9 +34,16 @@ export function removeAllItemFromCartAction() {
   }
 }
 
-export function subtractItemFromCartAction(coffeeId: string) {
+export function decrementItemQuantityFromCart(coffeeId: string) {
   return {
-    type: ActionTypes.SUBTRACT_ITEM_FROM_CART,
+    type: ActionTypes.DECREMENT_ITEM_QUANTITY_FROM_CART,
+    payload: { coffeeId }
+  }
+}
+
+export function incrementItemQuantityFromCart(coffeeId: string) {
+  return {
+    type: ActionTypes.INCREMENT_ITEM_QUANTITY_FROM_CART,
     payload: { coffeeId }
   }
 }

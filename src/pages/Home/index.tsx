@@ -1,6 +1,7 @@
 import { Coffee, Package, ShoppingCart, Timer } from "@phosphor-icons/react"
 
-import { CoffeeList } from '../../components/CoffeeList'
+// import { CoffeeList } from '../../components/CoffeeList'
+import { CoffeeGrid } from "../../components/CoffeeGrid"
 import { coffees } from '../../coffees'
 
 import coffeeDeliveryImage from "../../assets/coffeeDelivery.svg"
@@ -66,7 +67,7 @@ export function Home() {
       <CoffeeListTitle>Nossos cafés</CoffeeListTitle>
       <CoffeeListContainer>
         {coffees.map(coffee => {
-          return <CoffeeList key={coffee.id} coffee={coffee} isListOnCart={false}  />
+          return <CoffeeGrid key={coffee.id} coffee={coffee} />
         })}
       </CoffeeListContainer>
       </>

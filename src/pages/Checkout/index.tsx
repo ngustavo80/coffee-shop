@@ -26,7 +26,8 @@ import {
   ConfirmButton,
   EmptyCart,  
 } from "./styles"
-import { CoffeeList } from '../../components/CoffeeList'
+// import { CoffeeList } from '../../components/CoffeeList'
+import { CartList } from '../../components/CartList'
 
 export function Checkout () {
   const { cart, RegisterAddress, subTotal, total } = useContext(CartContext)
@@ -113,9 +114,16 @@ export function Checkout () {
           <section>
             <h1>Cafés selecionados</h1>
             <ConfirmOrderWrapper>
-              {cart.map(item => {
-                return <CoffeeList key={item.coffee.id} isListOnCart={true} coffee={item.coffee} />
-              })}
+              <div>
+                {cart.map(item => {
+                  return (
+                    <CartList 
+                      key={item.coffee.id}  
+                      coffee={item.coffee} 
+                    />
+                  ) 
+                })}
+              </div>
               <FinishDetails>
                 <div>
                   <p>Total de itens</p>
