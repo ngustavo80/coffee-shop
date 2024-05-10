@@ -37,11 +37,11 @@ copy the API Key to .env archive.
 ## Screenshots
 
 HOME
-[Home Page](https://github.com/ngustavo80/coffee-shop/blob/main/src/assets/screenshots/home.png)
+![Home Page](https://github.com/ngustavo80/coffee-shop/blob/main/src/assets/screenshots/home.png)
 
 CHECKOUT
-[CheckOut Page](https://github.com/ngustavo80/coffee-shop/blob/main/src/assets/screenshots/checkout.png)
+![CheckOut Page](https://github.com/ngustavo80/coffee-shop/blob/main/src/assets/screenshots/checkout.png)
 
 SUCCESS
-[Success Page](https://github.com/ngustavo80/coffee-shop/blob/main/src/assets/screenshots/success.png)
+![Success Page](https://github.com/ngustavo80/coffee-shop/blob/main/src/assets/screenshots/success.png)
 
