@@ -30,7 +30,7 @@ export function CartReducer(state: ItemProps[], action: any) {
     case ActionTypes.INCREMENT_ITEM_QUANTITY_FROM_CART: {
       return produce(state, (draft) => {
         const itemInCart = draft.find(item => item.coffee.id === action.payload.coffeeId)
-        if (itemInCart?.coffee.id && itemInCart.quantity > 1) {
+        if (itemInCart?.coffee.id && itemInCart.quantity >= 1) {
           itemInCart.quantity += 1
         }
       })
@@ -58,15 +58,3 @@ export function CartReducer(state: ItemProps[], action: any) {
     }
   }
 }
-
-
-
-// if(itemAlreadyInCartIndex) {
-      //   return produce(state, (draft) =>{
-      //     itemAlreadyInCartIndex.quantity=+ action.payload.item.quantity
-      //   })
-      // } else {
-      //   return produce(state, (draft) => {
-      //     draft.push(action.payload.item)
-      //   })
-      // }

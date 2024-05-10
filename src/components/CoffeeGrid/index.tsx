@@ -18,23 +18,17 @@ interface CoffeeGridProps {
 }
 
 export function CoffeeGrid({ coffee }: CoffeeGridProps) {
-  const { addItemToCart, cart } = useContext(CartContext)
+  const { addItemToCart } = useContext(CartContext)
 
-  const item = cart.find(item => item.coffee.id === coffee.id)
-  const [quantity, setQuantity] = useState(() => {
-    if(item?.quantity && item?.quantity > 0) {
-      return item.quantity
-    } else {
-      return 0
-    }
-  }) 
+  const [quantity, setQuantity] = useState(0)
 
   function handleAddItemToCart() {
     if(quantity === 0) {
       return console.log('Adicione no minimo uma unidade')
     }
-
+    
     addItemToCart({ coffee, quantity })
+    setQuantity(0)
   }
 
   function handleIncrementItem() {
