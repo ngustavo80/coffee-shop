@@ -1,30 +1,47 @@
-# React + TypeScript + Vite
+<div align="center">
+  <h1>
+    <img src="https://github.com/ngustavo80/coffee-shop/blob/main/src/assets/coffeeLogo.svg" alt="logo">
+  </h1>
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A shop where you can order your favorite coffee and receive in your address.
 
-Currently, two official plugins are available:
+## Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* [ReactJS](https://pt-br.legacy.reactjs.org/): ContextAPI, Properties and Reducers
+* [Vite](https://vitejs.dev/)
+* [React Hook Form](https://react-hook-form.com/)
+* [Styled Components](https://styled-components.com/)
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Clone project
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+  $ git clone https://github.com/ngustavo80/coffee-shop.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Dependencies
+
+To install dependencies, just run the following command:
+```bash
+  $ npm i
+```
+
+## Geolocation
+
+In order to use the Geolocation API, create a account in [OpenCage](https://opencagedata.com/) and
+copy the API Key to .env archive.
+
+
+## Screenshots
+
+HOME
+[Home Page](https://github.com/ngustavo80/coffee-shop/blob/main/src/assets/screenshots/home.png)
+
+CHECKOUT
+[CheckOut Page](https://github.com/ngustavo80/coffee-shop/blob/main/src/assets/screenshots/checkout.png)
+
+SUCCESS
+[Success Page](https://github.com/ngustavo80/coffee-shop/blob/main/src/assets/screenshots/success.png)
+
